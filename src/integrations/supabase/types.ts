@@ -14,13 +14,113 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      conversations: {
+        Row: {
+          ai_response: string
+          created_at: string | null
+          id: string
+          model_used: string
+          prompt_tiers_used: string[] | null
+          response_time_ms: number | null
+          session_id: string
+          token_usage: Json | null
+          user_id: string
+          user_request: string
+        }
+        Insert: {
+          ai_response: string
+          created_at?: string | null
+          id?: string
+          model_used?: string
+          prompt_tiers_used?: string[] | null
+          response_time_ms?: number | null
+          session_id: string
+          token_usage?: Json | null
+          user_id: string
+          user_request: string
+        }
+        Update: {
+          ai_response?: string
+          created_at?: string | null
+          id?: string
+          model_used?: string
+          prompt_tiers_used?: string[] | null
+          response_time_ms?: number | null
+          session_id?: string
+          token_usage?: Json | null
+          user_id?: string
+          user_request?: string
+        }
+        Relationships: []
+      }
+      user_memory: {
+        Row: {
+          confidence_score: number | null
+          created_at: string | null
+          id: string
+          last_accessed: string | null
+          memory_key: string
+          memory_type: string | null
+          memory_value: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          confidence_score?: number | null
+          created_at?: string | null
+          id?: string
+          last_accessed?: string | null
+          memory_key: string
+          memory_type?: string | null
+          memory_value: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          confidence_score?: number | null
+          created_at?: string | null
+          id?: string
+          last_accessed?: string | null
+          memory_key?: string
+          memory_type?: string | null
+          memory_value?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
-      [_ in never]: never
+      conversation_analytics: {
+        Row: {
+          avg_response_time: number | null
+          conversation_count: number | null
+          date: string | null
+          tiers_used: string[] | null
+          total_cached_tokens: number | null
+          total_input_tokens: number | null
+          total_output_tokens: number | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
+      memory_effectiveness: {
+        Row: {
+          avg_confidence: number | null
+          last_updated_date: string | null
+          memory_count: number | null
+          memory_type: string | null
+          most_recent_access: string | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      cleanup_old_memories: {
+        Args: { days_threshold?: number }
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never
